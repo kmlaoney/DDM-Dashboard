@@ -1,0 +1,39 @@
+library(shiny)
+
+# Use the xlsx package to load xlsx files into R
+library(xlsx)
+
+# Find the directory of where the Immigrant data file is located
+Immigrant <- read.xlsx("/Users/maloney/Downloads/Immigrant.xlsx", 1)
+
+
+# Define the overall UI
+shinyUI(
+  
+  # Use a fluid Bootstrap layout
+  fluidPage(    
+    
+    # Give the page a title
+    titlePanel("Telephones by region"),
+    
+    # Generate a row with a sidebar
+    sidebarLayout(      
+      
+      # Define the sidebar with one input
+      sidebarPanel(
+        selectInput("center", "Center:", 
+                    choices= c("Concourse", "Coney Island", "Crotona",
+                               "East New York", "Fort Greene", "Jamaica",
+                               "Queens", "Refugee", "Richmond", "Rockaway",
+                               "St. Nicholas", "Washington Heights", "Waverly",
+                               "Williamsburg"))
+      ),
+      
+      # Create a spot for the barplot
+      mainPanel(
+        plotOutput("ErrorPlot")  
+      )
+      
+    )
+  )
+)
